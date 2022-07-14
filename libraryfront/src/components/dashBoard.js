@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useState,useEffect } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -12,9 +13,13 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
+import { Link } from 'react-router-dom';
+import countService from '../services/count';
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
 
-const pages = ['Products', 'Pricing', 'Blog'];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const settings = ['Profile',  'Dashboard', 'Logout'];
 
 const ResponsiveAppBar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -34,8 +39,19 @@ const ResponsiveAppBar = () => {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
-
+  const [stats, setStats] = useState({})
+  const getAllStats = () =>{
+    countService.getAllStats().then(response =>{
+      setStats(response.data)
+    }).catch(e => {
+      console.log(e);
+    });
+  }
+  useEffect(() => {
+    getAllStats();
+  }, []);
   return (
+    <>
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
@@ -44,7 +60,7 @@ const ResponsiveAppBar = () => {
             variant="h6"
             noWrap
             component="a"
-            href="/"
+           
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
@@ -55,7 +71,7 @@ const ResponsiveAppBar = () => {
               textDecoration: 'none',
             }}
           >
-            LOGO
+            Hamza Books
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -87,11 +103,13 @@ const ResponsiveAppBar = () => {
                 display: { xs: 'block', md: 'none' },
               }}
             >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
+            
+                <MenuItem  onClick={handleCloseNavMenu}>
+                  <Typography textAlign="center">  <Link to='/users'> Users Table</Link></Typography>
+                  <Typography textAlign="center"><Link to='/livres'> Books Table</Link></Typography>
+                  <Typography textAlign="center"> <Link to='/categories'> Categories Table</Link></Typography>
                 </MenuItem>
-              ))}
+            
             </Menu>
           </Box>
           <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
@@ -99,7 +117,7 @@ const ResponsiveAppBar = () => {
             variant="h5"
             noWrap
             component="a"
-            href=""
+          
             sx={{
               mr: 2,
               display: { xs: 'flex', md: 'none' },
@@ -111,18 +129,32 @@ const ResponsiveAppBar = () => {
               textDecoration: 'none',
             }}
           >
-            LOGO
+           Hamza Books
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {pages.map((page) => (
+           
               <Button
-                key={page}
+               
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
-                {page}
+              <Link to='/users'> Users Table</Link>
               </Button>
-            ))}
+              <Button
+               
+                onClick={handleCloseNavMenu}
+                sx={{ my: 2, color: 'white', display: 'block' }}
+              >
+              <Link to='/livres'> Books Table</Link>
+              </Button>
+              <Button
+               
+                onClick={handleCloseNavMenu}
+                sx={{ my: 2, color: 'white', display: 'block' }}
+              >
+              <Link to='/categories'> Categories Table</Link>
+              </Button>
+        
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
@@ -157,6 +189,40 @@ const ResponsiveAppBar = () => {
         </Toolbar>
       </Container>
     </AppBar>
+    <Card sx={{ minWidth: 275 }}>
+      <CardContent>
+        <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+          Users
+        </Typography>
+        <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+         Number :  {stats.users}
+        </Typography>
+      </CardContent>
+     
+    </Card>
+    <Card sx={{ minWidth: 275 }}>
+      <CardContent>
+        <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+          Books
+        </Typography>
+        <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+         Number :  {stats.books}
+        </Typography>
+      </CardContent>
+     
+    </Card>
+    <Card sx={{ minWidth: 275 }}>
+      <CardContent>
+        <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+          Users
+        </Typography>
+        <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+         Number :  {stats.categories}
+        </Typography>
+      </CardContent>
+     
+    </Card>
+    </>
   );
 };
 export default ResponsiveAppBar;

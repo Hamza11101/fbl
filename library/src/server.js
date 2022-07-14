@@ -21,6 +21,8 @@ app.use('/api/v1',require('./routes/user'));
 app.use('/api/v1',require('./routes/auth'));
 app.use('/api/v1',require('./routes/livre'));
 app.use('/api/v1',require('./routes/categories'));
+app.use('/api/v1',require('./routes/count'));
+
 
 
 
