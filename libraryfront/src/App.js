@@ -11,6 +11,8 @@ import LivreTable from "./components/livres/livresTable";
 import AddNewLivre from "./components/livres/addNewLivre";
 import CategoriesTable from "./components/categories/categoriesTable";
 import AddNewCategorie from "./components/categories/addNewCategories";
+import Register from "./pages/register";
+import Login from "./pages/login";
 function App() {
   return (
     <BrowserRouter>
@@ -23,6 +25,10 @@ function App() {
       <Route exact path="/livres/add" element={<AddNewLivre />}/>
       <Route exact path="/categories" element={<CategoriesTable />}/>
       <Route exact path="/categories/add" element={<AddNewCategorie />}/>
+      <Route exact path="/register" element={<Register />}/>
+      <Route exact path="/login" element={<Login />}/>
+
+
    
 
 
