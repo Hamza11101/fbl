@@ -14,11 +14,11 @@ import AddNewCategorie from "./components/categories/addNewCategories";
 import Register from "./pages/register";
 import Login from "./pages/login";
 import Home from "./pages/home"
+import Books from "./pages/books"
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-      
       <Route exact path="/" element={<DashBoard />}/>
       <Route exact path="/users" element={<UserTable />}/>
       <Route exact path="/user/add" element={<AddNewUser />}/>
@@ -29,12 +29,8 @@ function App() {
       <Route exact path="/register" element={<Register />}/>
       <Route exact path="/login" element={<Login />}/>
       <Route exact path="/home" element={<Home />}/>
-
-
-   
-
-
-
+      <Route exact path="/books" element={<Books />}/>
+      
       </Routes>
       </BrowserRouter>
   );
