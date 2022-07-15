@@ -13,6 +13,7 @@ import CategoriesTable from "./components/categories/categoriesTable";
 import AddNewCategorie from "./components/categories/addNewCategories";
 import Register from "./pages/register";
 import Login from "./pages/login";
+import Home from "./pages/home"
 function App() {
   return (
     <BrowserRouter>
@@ -27,6 +28,7 @@ function App() {
       <Route exact path="/categories/add" element={<AddNewCategorie />}/>
       <Route exact path="/register" element={<Register />}/>
       <Route exact path="/login" element={<Login />}/>
+      <Route exact path="/home" element={<Home />}/>
 
 
    
